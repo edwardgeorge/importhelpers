@@ -1,7 +1,7 @@
-def dotted_import(name):
+def dotted(name):
     """Import python object from dotted path string.
 
-    eg: dotted_import('package.module.function')
+    eg: dotted('package.module.function')
 
     """
     mod, attr = name.split('.'), []
@@ -23,10 +23,10 @@ def dotted_import(name):
     raise ImportError('could not import %s' % name)
 
 
-def import_preferential(name, *morenames):
+def preferential(name, *morenames):
     """return first import that can be imported successfully.
 
-    eg: import_preferential('lxml.etree', 'cElementTree',
+    eg: preferential('lxml.etree', 'cElementTree',
         'elementtree.ElementTree', 'xml.etree.ElementTree')
 
     """
@@ -36,7 +36,7 @@ def import_preferential(name, *morenames):
     while names:
         name = names.pop(0)
         try:
-            return dotted_import(name)
+            return dotted(name)
         except ImportError, e:
             pass
     raise ImportError('could not satisfy any imports.')
